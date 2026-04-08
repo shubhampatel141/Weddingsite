@@ -142,11 +142,11 @@
 <button aria-label="Close menu" class="absolute top-6 right-12" id="mobile-menu-close" type="button">
 <span class="material-symbols-outlined text-primary text-3xl">close</span>
 </button>
-<a class="font-headline text-3xl text-on-surface hover:text-primary transition-colors" href="#story" onclick="closeMobileMenu()">Our Story</a>
-<a class="font-headline text-3xl text-on-surface hover:text-primary transition-colors" href="#events" onclick="closeMobileMenu()">Events</a>
-<a class="font-headline text-3xl text-on-surface hover:text-primary transition-colors" href="#travel" onclick="closeMobileMenu()">Travel</a>
-<a class="font-headline text-3xl text-on-surface hover:text-primary transition-colors" href="#gallery" onclick="closeMobileMenu()">Gallery</a>
-<a class="mt-4 px-10 py-3 bg-primary text-on-primary font-label text-sm tracking-widest uppercase" href="#rsvp" onclick="closeMobileMenu()">RSVP</a>
+<a class="font-headline text-3xl text-on-surface hover:text-primary transition-colors" href="#story">Our Story</a>
+<a class="font-headline text-3xl text-on-surface hover:text-primary transition-colors" href="#events">Events</a>
+<a class="font-headline text-3xl text-on-surface hover:text-primary transition-colors" href="#travel">Travel</a>
+<a class="font-headline text-3xl text-on-surface hover:text-primary transition-colors" href="#gallery">Gallery</a>
+<a class="mt-4 px-10 py-3 bg-primary text-on-primary font-label text-sm tracking-widest uppercase" href="#rsvp">RSVP</a>
 </div>
 <!-- Hero Section -->
 <section class="relative h-screen w-full flex flex-col items-center justify-center overflow-hidden bg-surface">
@@ -410,7 +410,7 @@
   allowfullscreen
   referrerpolicy="no-referrer-when-downgrade"
   title="Vikrama Heritage, Champaner-Pavagadh map"
-  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3697.8!2d73.5225!3d22.4916!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x395f9d9e5b5b5b5b%3A0x1234567890abcdef!2sChampaner-Pavagadh%20Archaeological%20Park%2C%20Gujarat!5e0!3m2!1sen!2sin!4v1691000000000!5m2!1sen!2sin"
+  src="https://maps.google.com/maps?q=Champaner-Pavagadh+Archaeological+Park,Gujarat,India&t=&z=13&ie=UTF8&iwloc=&output=embed"
 ></iframe>
 <div class="absolute top-4 left-4 bg-surface p-4 shadow-xl text-center space-y-2 max-w-xs relative overflow-hidden">
 <div class="absolute top-0 left-0 w-full h-1 bg-primary/10"></div>
@@ -495,7 +495,7 @@
 <p class="font-body text-on-surface-variant max-w-md mx-auto">We kindly request your response at your earliest convenience. Please let us know your availability for the celebrations so we can plan accordingly. We cannot wait to celebrate with you.</p>
 <p class="font-label text-xs tracking-widest uppercase text-outline pt-4">By October 15, 2026</p>
 </div>
-<form class="space-y-10" id="rsvp-form" novalidate>
+<form class="space-y-10" id="rsvp-form">
 <div class="space-y-2">
 <label class="font-label text-[10px] tracking-widest uppercase text-outline" for="rsvp-name">Full Name</label>
 <input class="w-full bg-transparent border-0 border-b border-outline focus:ring-0 focus:border-primary transition-colors py-3 px-0 placeholder:text-outline-variant/50" id="rsvp-name" name="name" placeholder="Your Full Name" required type="text"/>
@@ -624,6 +624,11 @@
         mobileMenuBtn.addEventListener('click', openMobileMenu);
         mobileMenuClose.addEventListener('click', closeMobileMenu);
 
+        // Close mobile menu when any link is clicked
+        document.querySelectorAll('#mobile-menu a').forEach(link => {
+            link.addEventListener('click', closeMobileMenu);
+        });
+
         // ── Active Nav on Scroll ──────────────────────────────────────────
         const sections  = ['story', 'events', 'travel', 'gallery', 'rsvp'];
         const navLinks  = document.querySelectorAll('.nav-link');
@@ -683,9 +688,7 @@
             e.preventDefault();
             let valid = true;
 
-            const nameVal  = nameInput.value.trim();
-            const emailVal = emailInput.value.trim();
-            const emailRx  = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            const nameVal = nameInput.value.trim();
 
             if (!nameVal) {
                 showError(nameInput, nameError, true);
@@ -694,7 +697,8 @@
                 showError(nameInput, nameError, false);
             }
 
-            if (!emailVal || !emailRx.test(emailVal)) {
+            // Use browser's built-in email validity check
+            if (!emailInput.validity.valid) {
                 showError(emailInput, emailError, true);
                 valid = false;
             } else {
