@@ -540,9 +540,10 @@
 <label class="font-label text-[10px] tracking-widest uppercase text-outline" for="rsvp-dietary">Dietary Restrictions</label>
 <input class="w-full bg-transparent border-0 border-b border-outline focus:ring-0 focus:border-primary transition-colors py-3 px-0 placeholder:text-outline-variant/50" id="rsvp-dietary" name="dietary" placeholder="e.g. Jain, Vegan, Allergies..." type="text"/>
 </div>
-<button class="w-full py-4 bg-primary text-on-primary font-label text-sm tracking-widest uppercase hover:bg-primary-container transition-all duration-[400ms] mt-8" id="rsvp-submit" type="submit">
+<button class="w-full py-4 bg-primary text-on-primary font-label text-sm tracking-widest uppercase hover:bg-primary-container transition-all duration-[400ms] mt-8 disabled:opacity-50 disabled:cursor-not-allowed" id="rsvp-submit" type="submit">
                     Submit Response
                 </button>
+<p class="hidden text-xs text-error mt-3 text-center" id="rsvp-submit-error">Something went wrong. Please try again.</p>
 </form>
 <!-- RSVP Success State (hidden by default) -->
 <div class="hidden text-center space-y-6 py-8" id="rsvp-success">
@@ -570,6 +571,28 @@
 <span class="material-symbols-outlined opacity-60">self_improvement</span>
 </div>
 </footer>
+<!-- Firebase SDK (compat build) -->
+<script src="https://www.gstatic.com/firebasejs/11.6.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore-compat.js"></script>
+<script>
+    // ── Firebase Configuration ────────────────────────────────────────────
+    // TODO: Replace the placeholder values below with your own Firebase project
+    // config. You can find it in the Firebase console under:
+    //   Project Settings → Your apps → Web app → SDK setup and configuration
+    // After replacing the config, also enable Firestore Database in the
+    // Firebase console (Build → Firestore Database → Create database).
+    const firebaseConfig = {
+        apiKey:            "YOUR_API_KEY",
+        authDomain:        "YOUR_PROJECT_ID.firebaseapp.com",
+        projectId:         "YOUR_PROJECT_ID",
+        storageBucket:     "YOUR_PROJECT_ID.appspot.com",
+        messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+        appId:             "YOUR_APP_ID"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.firestore();
+</script>
 <script>
         // ── Hero Video Slow Motion ────────────────────────────────────────
         const heroVideo = document.getElementById('hero-video');
@@ -711,10 +734,39 @@
 
             if (!valid) return;
 
-            // Show success state
-            rsvpForm.classList.add('hidden');
-            rsvpSuccess.classList.remove('hidden');
-            rsvpSuccess.classList.add('reveal', 'active');
+            // Collect selected events
+            const selectedEvents = Array.from(
+                rsvpForm.querySelectorAll('input[name="events"]:checked')
+            ).map(cb => cb.value);
+
+            const rsvpData = {
+                name:        nameInput.value.trim(),
+                email:       emailInput.value.trim(),
+                attendance:  document.getElementById('rsvp-attendance').value,
+                events:      selectedEvents,
+                dietary:     document.getElementById('rsvp-dietary').value.trim(),
+                submittedAt: firebase.firestore.FieldValue.serverTimestamp()
+            };
+
+            // Show loading state
+            const submitBtn  = document.getElementById('rsvp-submit');
+            const submitErr  = document.getElementById('rsvp-submit-error');
+            submitBtn.disabled    = true;
+            submitBtn.textContent = 'Sending…';
+            submitErr.classList.add('hidden');
+
+            db.collection('rsvps').add(rsvpData)
+                .then(() => {
+                    rsvpForm.classList.add('hidden');
+                    rsvpSuccess.classList.remove('hidden');
+                    rsvpSuccess.classList.add('reveal', 'active');
+                })
+                .catch((error) => {
+                    console.error('RSVP submission error:', error);
+                    submitBtn.disabled    = false;
+                    submitBtn.textContent = 'Submit Response';
+                    submitErr.classList.remove('hidden');
+                });
         });
 
         // Clear error on input
