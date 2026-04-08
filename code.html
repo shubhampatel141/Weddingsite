@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+
+<html class="scroll-smooth" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Shruti &amp; Shubham | The Ethereal Manuscript</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,700;1,400&amp;family=Manrope:wght@300;400;600;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "error": "#ba1a1a",
+                        "surface-container-highest": "#e6e2dd",
+                        "outline": "#82756a",
+                        "tertiary": "#795555",
+                        "inverse-primary": "#ffb4a6",
+                        "on-error": "#ffffff",
+                        "secondary-container": "#fed65b",
+                        "on-secondary-container": "#745c00",
+                        "tertiary-fixed-dim": "#eabbbb",
+                        "surface-bright": "#fdf9f4",
+                        "on-error-container": "#93000a",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-variant": "#e6e2dd",
+                        "surface-tint": "#8f4b3f",
+                        "error-container": "#ffdad6",
+                        "tertiary-container": "#cea2a2",
+                        "primary-container": "#eb9687",
+                        "on-primary-container": "#6a2e24",
+                        "inverse-surface": "#31302d",
+                        "on-surface-variant": "#50453b",
+                        "on-primary": "#ffffff",
+                        "on-primary-fixed": "#3a0a04",
+                        "outline-variant": "#d4c4b7",
+                        "on-secondary": "#ffffff",
+                        "on-secondary-fixed": "#241a00",
+                        "tertiary-fixed": "#ffdad9",
+                        "primary-fixed-dim": "#ffb4a6",
+                        "surface-dim": "#ddd9d5",
+                        "on-primary-fixed-variant": "#723429",
+                        "on-tertiary-fixed": "#2e1415",
+                        "inverse-on-surface": "#f4f0eb",
+                        "on-background": "#1c1c19",
+                        "on-tertiary": "#ffffff",
+                        "surface-container-high": "#ebe8e3",
+                        "primary-fixed": "#ffdad4",
+                        "secondary-fixed": "#ffe088",
+                        "on-tertiary-fixed-variant": "#5f3e3f",
+                        "secondary": "#735c00",
+                        "on-surface": "#1c1c19",
+                        "background": "#fdf9f4",
+                        "surface": "#fdf9f4",
+                        "surface-container-low": "#f7f3ee",
+                        "on-tertiary-container": "#583839",
+                        "secondary-fixed-dim": "#e9c349",
+                        "primary": "#8f4b3f",
+                        "on-secondary-fixed-variant": "#574500",
+                        "surface-container": "#f1ede8"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "fontFamily": {
+                        "headline": ["Noto Serif"],
+                        "body": ["Manrope"],
+                        "label": ["Manrope"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 200, 'GRAD' 0, 'opsz' 24;
+        }
+        .asymmetric-grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+        }
+        .perspective-1000 { perspective: 1000px; }
+        .rotate-y-180 { transform: rotateY(180deg); }
+        .preserve-3d { transform-style: preserve-3d; }
+        .backface-hidden { backface-visibility: hidden; }
+        .flip-card-inner { transition: transform 0.8s; }
+        .flip-card:hover .flip-card-inner { transform: rotateY(180deg); }
+        
+        .mandala-texture {
+            background-image: url("data:image/svg+xml,%3Csvg width='400' height='400' viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M200 0c110.457 0 200 89.543 200 200S310.457 400 200 400 0 310.457 0 200 89.543 0 200 0zm0 20c-99.411 0-180 80.589-180 180s80.589 180 180 180 180-80.589 180-180S299.411 20 200 20zm0 20c88.366 0 160 71.634 160 160s-71.634 160-160 160S40 288.366 40 200 111.634 40 200 40z' fill='%2382756a' fill-opacity='0.03'/%3E%3C/svg%3E");
+        }
+
+        .mandala-divider {
+            background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%238f4b3f' stroke-width='0.5' stroke-opacity='0.2'%3E%3Ccircle cx='50' cy='50' r='40'/%3E%3Ccircle cx='50' cy='50' r='30'/%3E%3Cpath d='M50 10 L50 90 M10 50 L90 50 M21.7 21.7 L78.3 78.3 M21.7 78.3 L78.3 21.7'/%3E%3C/g%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .fade-in {
+            opacity: 0;
+            transition: opacity 1.5s ease-in-out;
+        }
+        .fade-in.active {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body selection:bg-primary-container selection:text-on-primary-container">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 bg-stone-50/70 dark:bg-stone-900/70 backdrop-blur-md flex justify-between items-center px-12 py-6">
+<div class="font-serif italic text-2xl text-[#1c1c19] dark:text-[#fdf9f4]">S &amp; S</div>
+<div class="hidden md:flex gap-12 font-serif text-sm tracking-widest uppercase items-center">
+<a class="text-[#8f4b3f] border-b border-[#735c00] pb-1 transition-all duration-400" href="#">Our Story</a>
+<a class="text-[#1c1c19] dark:text-[#fdf9f4] opacity-70 hover:opacity-100 hover:text-[#735c00] transition-all duration-400" href="#events">Events</a>
+<a class="text-[#1c1c19] dark:text-[#fdf9f4] opacity-70 hover:opacity-100 hover:text-[#735c00] transition-all duration-400" href="#travel">Travel</a>
+<a class="text-[#1c1c19] dark:text-[#fdf9f4] opacity-70 hover:opacity-100 hover:text-[#735c00] transition-all duration-400" href="#gallery">Gallery</a>
+<a class="px-6 py-2 bg-primary text-on-primary rounded-md tracking-widest hover:bg-primary-container transition-all duration-400" href="#rsvp">RSVP</a>
+</div>
+<div class="md:hidden">
+<span class="material-symbols-outlined text-primary text-3xl">menu</span>
+</div>
+</nav>
+<!-- Hero Section -->
+<section class="relative h-screen w-full flex flex-col items-center justify-center overflow-hidden bg-surface">
+<div class="absolute inset-0 z-0">
+<div class="w-full h-full bg-cover bg-center opacity-60" data-alt="Dreamy wide angle landscape of historic Indian heritage palace at Pavagadh during golden sunset with soft ethereal light." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuA8Vybtn0JS1UfTIV5P86bJy7U3C3u8bCC_ib2OP5ZrNnq1SemhU6F0JIMJ-rIswmKKh-CcYzysVpE6V4BczM9fGoj53xYG15SwYtOODRYnb5fPmttt2RIQz5glE1sHb7aqOtoV6LwmPgkdKngbqETNK_1kT3kRkGDqejf8P4WBEM1WnBbPQwdKc-pfhrX5dm8sr2FHn1e8PgTp5Tz2lQXy4onCikQnDoUmnF1SIgqc8nwM52hQpK8rKsvlA0LCKO2vAGywCE_Fz6en');"></div>
+<div class="absolute inset-0 bg-gradient-to-b from-transparent via-background/20 to-background"></div>
+</div>
+<div class="relative z-10 text-center space-y-8 max-w-4xl px-6 fade-in active">
+<p class="font-label text-xs tracking-[0.3em] uppercase text-outline">A Journey of Two Souls</p>
+<h1 class="font-headline text-7xl md:text-9xl font-extrabold tracking-tighter text-on-surface">
+                Shruti <span class="text-primary italic font-light">&amp;</span> Shubham
+            </h1>
+<div class="space-y-2">
+<p class="font-headline text-2xl md:text-3xl text-on-surface-variant font-light">December 22–24, 2026</p>
+<p class="font-label text-sm tracking-widest uppercase text-secondary">Vikrama Heritage, Pavagadh</p>
+</div>
+<!-- Countdown Timer -->
+<div class="flex gap-8 justify-center pt-12 border-t border-outline-variant/30 mt-12 max-w-md mx-auto">
+<div class="flex flex-col items-center">
+<span class="text-3xl font-headline text-primary">342</span>
+<span class="text-[10px] tracking-widest uppercase opacity-60">Days</span>
+</div>
+<div class="flex flex-col items-center">
+<span class="text-3xl font-headline text-primary">12</span>
+<span class="text-[10px] tracking-widest uppercase opacity-60">Hours</span>
+</div>
+<div class="flex flex-col items-center">
+<span class="text-3xl font-headline text-primary">45</span>
+<span class="text-[10px] tracking-widest uppercase opacity-60">Mins</span>
+</div>
+</div>
+</div>
+<div class="absolute bottom-12 animate-bounce">
+<span class="material-symbols-outlined text-outline">keyboard_double_arrow_down</span>
+</div>
+</section>
+<!-- Welcome Section -->
+<section class="py-32 px-12 md:px-24 bg-surface-container-low relative overflow-hidden mandala-texture">
+<div class="max-w-4xl mx-auto text-center space-y-8 reveal">
+<span class="material-symbols-outlined text-secondary text-5xl opacity-40">church</span>
+<h2 class="font-headline text-4xl md:text-5xl text-on-surface leading-snug">
+                Welcome to our <span class="italic text-primary font-light">wedding celebration</span>.
+            </h2>
+<p class="font-body text-on-surface-variant leading-relaxed text-lg max-w-3xl mx-auto">
+                With immense joy and gratitude, we invite you to join us as we begin this new chapter together. Surrounded by the timeless beauty of Pavagadh, we look forward to celebrating love, tradition, and togetherness with our closest family and friends. Your presence means everything to us, and we cannot wait to share these unforgettable moments with you.
+            </p>
+</div>
+</section>
+<!-- Mandala Divider 1 -->
+<div class="h-24 mandala-divider bg-surface"></div>
+<!-- Our Story Section -->
+<section class="py-32 bg-surface overflow-hidden">
+<div class="asymmetric-grid max-w-[1400px] mx-auto gap-y-24 px-6 md:px-12">
+<!-- Part 1 -->
+<div class="col-span-12 md:col-span-7 relative group reveal">
+<div class="overflow-hidden rounded-sm">
+<img class="w-full h-[600px] object-cover hover:scale-105 transition-transform duration-[2000ms]" data-alt="Cinematic editorial photograph of a couple holding hands while walking through ancient stone archway at sunset." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDVgglv6PvcfuCPfkjbaJXgOntq-22vtMsbpVwwElwPAKAfPKbqn27ePC0OolDu1vhm2NPGR_v4-6v8xVJf98eXQcwo57vckhY6As4h9XHXoX_kufgVTZh-ZpIvjZY6aDisS7LSHOXsQfluVSjpGMsah-y8Z50-ofKwtfhTFMIkxkmEJfY8wjJSIUqEr111B-EjJ0QB_12lYZp14UPDGkhfqI9IOWHA8y_mJMzz62yGpn2z11-PRpPnktjhHg9CrAIvIzcV5-1Wls8A"/>
+</div>
+<div class="absolute -bottom-12 -right-6 md:-right-12 bg-surface-container p-12 max-w-sm hidden md:block shadow-sm reveal" style="transition-delay: 200ms;">
+<h3 class="font-headline text-3xl mb-4 italic">The Journey</h3>
+<p class="text-sm leading-loose text-on-surface-variant">
+                        Some stories begin with chance, but ours was built on laughter, understanding, and unwavering support.
+                    </p>
+</div>
+</div>
+<!-- Part 2 -->
+<div class="col-span-12 md:col-start-7 md:col-span-6 flex flex-col justify-center space-y-8 md:pl-24 reveal">
+<p class="font-label text-xs tracking-widest text-secondary uppercase">The Narrative</p>
+<h3 class="font-headline text-4xl leading-tight">From Mountain Peaks to Sacred Hills</h3>
+<p class="font-body leading-loose text-on-surface-variant">
+                    From the breathtaking landscapes of Banff to the stillness of Zion National Park, our journey has been defined by a shared love for the world's quiet wonders. We found a rhythm in the exploration of both grand vistas and intimate conversations.
+                    <br/><br/>
+                    It is a story that continues to unfold—with love, intention, and a lifetime ahead. Every milestone has brought us closer to this threshold, where we stand ready to write our next chapter in the company of those who have shaped our lives.
+                </p>
+</div>
+<!-- Part 3 -->
+<div class="col-span-12 md:col-span-5 md:order-last order-none mt-12 md:mt-0 reveal">
+<div class="overflow-hidden rounded-sm relative">
+<img class="w-full h-[500px] object-cover" data-alt="Intimate close up portrait of the couple's faces partially in shadow with soft warm light highlights." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA0twGD3WSHpm-dNb7ppwU2GwBHjkXwwIcgtruqaTPlNO-E6FpjLZaFEylOb32QMVmF4cBG_y8oerdbZfX36PPhIuQKGMIYNsrOwDKuHvniex84ijSBPukQKVmI0OQ2gJE1qcrfqB3In4MTKVrhHsYPQ8Q1VyM7yY8PmS5tok8krlzmRmmLB66qKhgi_AII4HB0WUaOLby8hqytWGD4zEdG-z4a7MBc102khP8OJsdbX6ZuNcLuWvYWCZl7TfaNLWBzCP1hGIE63maj"/>
+</div>
+</div>
+<div class="col-span-12 md:col-span-7 flex items-center md:pr-24 reveal">
+<p class="font-headline text-4xl italic text-primary leading-relaxed">
+                    "This celebration is a story that continues to unfold—with love, intention, and a lifetime ahead."
+                 </p>
+</div>
+</div>
+</section>
+<!-- Wedding Events Section -->
+<section class="py-32 px-6 md:px-12 bg-surface-container relative" id="events">
+<div class="absolute right-0 top-0 w-64 h-64 mandala-texture opacity-5 -translate-y-1/2 translate-x-1/2 rounded-full"></div>
+<div class="max-w-6xl mx-auto space-y-16">
+<div class="text-center space-y-4 reveal">
+<p class="font-label text-xs tracking-widest text-outline uppercase">The Celebration</p>
+<h2 class="font-headline text-5xl">The Itinerary</h2>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<!-- Event 1: Arrival -->
+<div class="flip-card h-[450px] perspective-1000 group reveal">
+<div class="flip-card-inner relative w-full h-full preserve-3d">
+<div class="absolute inset-0 backface-hidden flex flex-col items-center justify-center p-8 space-y-6 text-center shadow-sm">
+<span class="material-symbols-outlined text-secondary text-8xl" style="font-variation-settings: 'FILL' 1;">landscape</span>
+<div>
+<p class="text-[10px] tracking-widest uppercase opacity-50 mb-2">Dec 22 • Morning</p>
+<h4 class="font-headline text-2xl">The Arrival</h4>
+</div>
+</div>
+<div class="absolute inset-0 backface-hidden rotate-y-180 bg-primary/95 text-on-primary p-8 flex flex-col justify-center space-y-4">
+<div class="space-y-1">
+<p class="font-label text-[10px] uppercase tracking-widest opacity-80">Dress Code</p>
+<p class="font-body text-sm font-semibold">Travel Chic / Casual Elegance</p>
+</div>
+<p class="text-sm italic pt-4 border-t border-on-primary/20">Guests are warmly welcomed as they arrive and settle into the celebrations ahead. Take this time to relax, explore the surroundings, and reconnect before the festivities begin.</p>
+</div>
+</div>
+</div>
+<!-- Event 2: Mehndi -->
+<div class="flip-card h-[450px] perspective-1000 group reveal" style="transition-delay: 100ms;">
+<div class="flip-card-inner relative w-full h-full preserve-3d">
+<div class="absolute inset-0 backface-hidden flex flex-col items-center justify-center p-8 space-y-6 text-center shadow-sm">
+<span class="material-symbols-outlined text-8xl" style="font-variation-settings: 'FILL' 1;">draw</span>
+<div>
+<p class="text-[10px] tracking-widest uppercase opacity-50 mb-2">Dec 22 • Evening</p>
+<h4 class="font-headline text-2xl">Mehndi</h4>
+</div>
+</div>
+<div class="absolute inset-0 backface-hidden rotate-y-180 bg-tertiary/95 text-on-tertiary p-8 flex flex-col justify-center space-y-4">
+<div class="space-y-1">
+<p class="font-label text-[10px] uppercase tracking-widest opacity-80">Dress Code</p>
+<p class="font-body text-sm font-semibold">Vibrant Indian / Festive Colors</p>
+</div>
+<p class="text-sm italic pt-4 border-t border-on-tertiary/20">An intimate and joyful celebration, the Mehndi ceremony is filled with intricate henna artistry, music, and laughter. This event marks the beginning of the wedding festivities, bringing everyone together.</p>
+</div>
+</div>
+</div>
+<!-- Event 3: Grah Shanti -->
+<div class="flip-card h-[450px] perspective-1000 group reveal" style="transition-delay: 200ms;">
+<div class="flip-card-inner relative w-full h-full preserve-3d">
+<div class="absolute inset-0 backface-hidden flex flex-col items-center justify-center p-8 space-y-6 text-center shadow-sm">
+<span class="material-symbols-outlined text-8xl" style="font-variation-settings: 'FILL' 1;">temple_hindu</span>
+<div>
+<p class="text-[10px] tracking-widest uppercase opacity-50 mb-2">Dec 23 • Morning</p>
+<h4 class="font-headline text-2xl">Grah Shanti</h4>
+</div>
+</div>
+<div class="absolute inset-0 backface-hidden rotate-y-180 bg-surface-container-highest text-on-surface p-8 flex flex-col justify-center space-y-4 border border-primary/20">
+<div class="space-y-1">
+<p class="font-label text-[10px] uppercase tracking-widest opacity-80 text-outline">Dress Code</p>
+<p class="font-body text-sm font-semibold">Traditional Indian (Light Colors)</p>
+</div>
+<p class="text-sm italic pt-4 border-t border-outline/20">A sacred ritual performed to invoke blessings and harmony, the Grah Shanti ceremony sets a spiritual tone for the wedding. It is a serene and meaningful gathering with close family.</p>
+</div>
+</div>
+</div>
+<!-- Event 4: Haldi -->
+<div class="flip-card h-[450px] perspective-1000 group reveal">
+<div class="flip-card-inner relative w-full h-full preserve-3d">
+<div class="absolute inset-0 backface-hidden flex flex-col items-center justify-center p-8 space-y-6 text-center shadow-sm">
+<span class="material-symbols-outlined text-secondary-container text-8xl" style="font-variation-settings: 'FILL' 1;">palette</span>
+<div>
+<p class="text-[10px] tracking-widest uppercase opacity-50 mb-2">Dec 23 • Late Morning</p>
+<h4 class="font-headline text-2xl">Haldi</h4>
+</div>
+</div>
+<div class="absolute inset-0 backface-hidden rotate-y-180 bg-secondary-container text-on-secondary-container p-8 flex flex-col justify-center space-y-4">
+<div class="space-y-1">
+<p class="font-label text-[10px] uppercase tracking-widest opacity-80">Dress Code</p>
+<p class="font-body text-sm font-semibold">Yellow / Light Festive Wear</p>
+</div>
+<p class="text-sm italic pt-4 border-t border-on-secondary-container/20">A playful and vibrant tradition where turmeric paste is applied to the bride and groom. Filled with laughter and joy, it symbolizes purification and blessings for the journey ahead.</p>
+</div>
+</div>
+</div>
+<!-- Event 5: Sangeet -->
+<div class="flip-card h-[450px] perspective-1000 group reveal" style="transition-delay: 100ms;">
+<div class="flip-card-inner relative w-full h-full preserve-3d">
+<div class="absolute inset-0 backface-hidden flex flex-col items-center justify-center p-8 space-y-6 text-center shadow-sm">
+<span class="material-symbols-outlined text-8xl" style="font-variation-settings: 'FILL' 1;">nightlight</span>
+<div>
+<p class="text-[10px] tracking-widest uppercase opacity-50 mb-2">Dec 23 • Evening</p>
+<h4 class="font-headline text-2xl">Sangeet</h4>
+</div>
+</div>
+<div class="absolute inset-0 backface-hidden rotate-y-180 bg-[#735c00]/95 text-white p-8 flex flex-col justify-center space-y-4">
+<div class="space-y-1">
+<p class="font-label text-[10px] uppercase tracking-widest opacity-80">Dress Code</p>
+<p class="font-body text-sm font-semibold">Glamorous Indian / Cocktail Attire</p>
+</div>
+<p class="text-sm italic pt-4 border-t border-white/20">An evening of music, dance, and celebration, the Sangeet brings both families together for unforgettable performances. Expect energy, elegance, and a night full of joy.</p>
+</div>
+</div>
+</div>
+<!-- Event 6: Wedding Ceremony -->
+<div class="flip-card h-[450px] perspective-1000 group reveal" style="transition-delay: 200ms;">
+<div class="flip-card-inner relative w-full h-full preserve-3d">
+<div class="absolute inset-0 backface-hidden flex flex-col items-center justify-center p-8 space-y-6 text-center shadow-sm">
+<span class="material-symbols-outlined text-8xl" style="font-variation-settings: 'FILL' 1;">sunny</span>
+<div>
+<p class="text-[10px] tracking-widest uppercase opacity-50 mb-2">Dec 24 • Sunset</p>
+<h4 class="font-headline text-2xl">Wedding Ceremony</h4>
+</div>
+</div>
+<div class="absolute inset-0 backface-hidden rotate-y-180 bg-primary text-on-primary p-8 flex flex-col justify-center space-y-4">
+<div class="space-y-1">
+<p class="font-label text-[10px] uppercase tracking-widest opacity-80">Dress Code</p>
+<p class="font-body text-sm font-semibold">Formal Indian / Black Tie Optional</p>
+</div>
+<p class="text-sm italic pt-4 border-t border-on-primary/20">Set against the breathtaking backdrop of Pavagadh at sunset, the wedding ceremony is a timeless union of tradition and love. Shruti and Shubham begin their journey together as one.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Mandala Divider 2 -->
+<div class="h-24 mandala-divider bg-surface"></div>
+<!-- Travel & Accommodation -->
+<section class="py-32 bg-surface overflow-hidden" id="travel">
+<div class="max-w-[1400px] mx-auto px-6 md:px-12 grid grid-cols-1 md:grid-cols-12 gap-16 items-start">
+<div class="md:col-span-5 space-y-12 reveal">
+<div class="space-y-4">
+<p class="font-label text-xs tracking-widest text-secondary uppercase">Destination</p>
+<h2 class="font-headline text-5xl">Vikrama Heritage</h2>
+<p class="font-body text-on-surface-variant leading-relaxed">
+                        We are so excited to celebrate with you in Pavagadh, Gujarat. Vikrama Heritage offers a serene and scenic setting nestled in the mountains. Detailed travel guidance, accommodation options, and logistics will be shared here to ensure a seamless experience for all our guests.
+                    </p>
+</div>
+<div class="space-y-8">
+<div class="flex gap-6 items-start reveal" style="transition-delay: 100ms;">
+<span class="material-symbols-outlined text-primary">location_on</span>
+<div class="space-y-2">
+<h4 class="font-headline text-xl">The Address</h4>
+<p class="text-sm text-outline">Hill Base Road, Champaner-Pavagadh, Gujarat 389360</p>
+</div>
+</div>
+<div class="flex gap-6 items-start reveal" style="transition-delay: 200ms;">
+<span class="material-symbols-outlined text-primary">flight</span>
+<div class="space-y-2">
+<h4 class="font-headline text-xl">Travel Logistics</h4>
+<p class="text-sm text-outline">Nearest airport: Vadodara (BDQ). Shuttles will be arranged to transport guests to the venue.</p>
+</div>
+</div>
+<div class="flex gap-6 items-start reveal" style="transition-delay: 300ms;">
+<span class="material-symbols-outlined text-primary">hotel</span>
+<div class="space-y-2">
+<h4 class="font-headline text-xl">Accommodation</h4>
+<p class="text-sm text-outline">All guests are invited to stay on-site. Room details will be shared upon RSVP confirmation.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="md:col-span-7 h-[600px] bg-surface-container rounded-sm overflow-hidden shadow-sm reveal" style="transition-delay: 200ms;">
+<div class="w-full h-full relative">
+<img class="w-full h-full object-cover grayscale opacity-40" data-alt="Detailed vintage-style map of the Pavagadh hills region with subtle gold ink markings." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAAEpkDUijE6X7-B0TktCi4IT3wcrok-6WshMtZySAP_DQmzQF8_Edet8jKeoJrtM4766SCeoWuuzpEBG3_3yvcCqMWkFUHYBzt9JTRlOvhoSIp2zCM9w6rSwrEFw3Obv-AcSS2IcSJqNd2Xi0urHCN9PlwaT3V1C5IfeKvb0ut7uYMXS1MJfLt32i816ELOSDwLT9gwsN6aKJvd75hcuioN4svpfUuEjLlIA_AfB-CELewnwvX5GxBWsaRLhoRfeE2QBGEPMLRpIld"/>
+<div class="absolute inset-0 flex items-center justify-center">
+<div class="bg-surface p-8 shadow-xl text-center space-y-4 max-w-xs relative overflow-hidden">
+<div class="absolute top-0 left-0 w-full h-1 bg-primary/10"></div>
+<span class="material-symbols-outlined text-primary text-4xl" style="font-variation-settings: 'FILL' 1;">push_pin</span>
+<p class="font-headline text-xl">Vikrama Heritage</p>
+<p class="text-[10px] tracking-widest uppercase">Embedded Map View</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Photo Gallery Section -->
+<section class="py-32 px-6 md:px-12 bg-surface-container-low relative" id="gallery">
+<div class="absolute left-0 bottom-0 w-80 h-80 mandala-texture opacity-5 translate-y-1/3 -translate-x-1/3 rounded-full"></div>
+<div class="max-w-[1400px] mx-auto">
+<div class="text-center mb-16 space-y-4 reveal">
+<p class="font-label text-xs tracking-widest text-outline uppercase">Captured Moments</p>
+<h2 class="font-headline text-5xl">The Gallery</h2>
+</div>
+<div class="columns-1 md:columns-2 lg:columns-3 gap-8 space-y-8">
+<div class="relative overflow-hidden group reveal">
+<img class="w-full grayscale hover:grayscale-0 transition-all duration-700" data-alt="Black and white artistic photograph of a couple standing by a calm lake with mountain reflections." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCaDapNUaTN00SA0VXMfgkl8MwPozad890GkG2hvKLsQ8ojwS0QzoEm84JA0ar1mEKQh7Hasd1HhmsTxqaxZK6qf56PXPTLG2sHJ9hqX--4dmnJqZk7Yd3SP6BFJ3ob3_hKY50wQsAwXiY5KZT8n-ljQz9OYywImtyVD9vZOn4yx7iAbr4SmHN8mbW30Djhkg5lC_hpEbmQhA2FPxp6cagT3gihkBMdMxRjQbgKyz2Al-pRN6dO6THS6JHe_TwcDcJvlvmYprIYAQM_"/>
+</div>
+<div class="relative overflow-hidden group reveal">
+<img class="w-full" data-alt="Detailed close up of intricate bridal henna designs on hands with heavy gold jewelry." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCPrxOBwi2hdVZtE3a4PlugNmj_87JGrt861AuzE7KvvKGWQARSlMPEpU-C6iDsp4mkogq2ix9al-QsIzLbBYr1AwR4YTBqsvDU2TxH0t2YLEeWi8_pNiMqYbohuW-J5z4sUL5wGQnaZCJLOqAy-nol1nmWa2gEkDzJKiXQ_3YQ-4XRV6ZUuhU4FkcQpKB9OmtBidg3WrXI6Pwr48lJKdbnWgaBZa15YH0C1gmS2wUZqnoofEQkhjb7JyuFKpAeE6B8wMQy7YrunbFT"/>
+</div>
+<div class="relative overflow-hidden group reveal">
+<img class="w-full grayscale hover:grayscale-0 transition-all duration-700" data-alt="Elegant photo of traditional Indian wedding attire hanging against a carved wooden door." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDiarYwPVM2fgviX3V1uDOt1Ccnl1nSw-XtBKUVMjqObJac7oJtDGm5oPoOw9lj3ppmtMXmnaQkDdcaB1D-waaP7lMCaGZbVolmCbDy3_KqIi_ayAhl7mRbUwGBSm4TapCSCD0o_wQ3ZjloGRJ2PL9tC3sJ8uvDkoLJ9TVbhQJTb_lJM3sbHkE5nqFUyOSwhAw7SO-e8_RJCFtfbAIfU4Lgz69l1_-TBphYjna_qHjDfqKr-bc0VUJOkQNVv6D24r48x-0nyFuJ8GKs"/>
+</div>
+<div class="relative overflow-hidden group reveal">
+<img class="w-full" data-alt="Candid moment of the couple laughing during their engagement ceremony with blurred floral background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCYSa_N8RqPwsx-QCFaoUgUHKF5ZcMVl5X9-9w4RW2IGgHbS6OPowRYjjz1dh_7hpgjFIodyDJ7yrue9PmPY-LSDLp0lNQZrR8JuWD97DR4G0fNntjwhQCJe4BCxQN9XDvNPRgwcA7S6vXX38qriTVWp-AdFh6ozRh8SMmhcpY-tbt7Y7NU5ypRog3sB24PXLo2bgWz-afG0opfc82f2BdFOEZkCvhgGEyC-2oT5IVOzBRPIvwazfF9Q2F2Zci1s91qeCIJRRG4FVwk"/>
+</div>
+<div class="relative overflow-hidden group reveal">
+<img class="w-full grayscale hover:grayscale-0 transition-all duration-700" data-alt="Wide shot of a luxury dinner table setup with many candles and white flower centerpieces." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCgTT_DzKY8rznyP_G_mz817-n1ug9u2RBbJMpDaMW7RNm6Cr2f-P1uk0sy6Nw7YAag689ky51lzY5__-UfDV_efJZOt421gZFaV1IWbteYNF4Bco3L5zcg2U0kYh1vtalZCQw5zj8Hpmp4T5cAilQaB1zaCrzSYqIjT1TBtd9XMUZqtDZejLDwCMBaNpIjxFQvOMWpH9HeeJcUnAFoI3BR2lCkqf-gZltJro3DB-HOHqddz32sKehus1oUtfwlmh8F5M2nx1HZ6PYW"/>
+</div>
+<div class="relative overflow-hidden group reveal">
+<img class="w-full" data-alt="Couple sitting on the steps of an ancient Indian temple at dusk with soft lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAkhyEq02Axq9HhsMCNdLkxibj_6pNuzWhO5xqDfKwPLpoU1t6IFVoLfVBgW1AB-7TuEkTpU8iYDV8edA44uhb-tf6TKFCXg74Hj7FjxnSkLQVI4fqQck3NOxv2zDggIX9bNwEn-oplo3u34454i_n_rVPEPSvyCwSAlxqXvo39p7GRUl-jD0GsFnmcBuNdwQqYetfrNcjSKdY8b3lpQkXFo5lJ6-Xcqp06nBq_RY2J6ISGGdhRtjY_g1m6SldYjgZ0CFNzFPR97bqM"/>
+</div>
+</div>
+</div>
+</section>
+<!-- FAQ Section -->
+<section class="py-32 bg-surface">
+<div class="max-w-3xl mx-auto px-6">
+<h2 class="font-headline text-4xl text-center mb-16 italic reveal">Kind Inquiries</h2>
+<div class="space-y-0 border-t border-outline-variant/20">
+<details class="group py-8 border-b border-outline-variant/20 reveal">
+<summary class="flex justify-between items-center cursor-pointer list-none">
+<span class="font-headline text-xl text-on-surface">Is there a dress code for the wedding ceremony?</span>
+<span class="material-symbols-outlined transition-transform group-open:rotate-180">expand_more</span>
+</summary>
+<div class="mt-6 font-body text-on-surface-variant leading-relaxed">
+                        Yes, the dress code for the main ceremony on December 24 is Formal Indian or Black Tie Optional. We invite you to dress in your finest traditional attire or formal evening wear to celebrate this special occasion.
+                    </div>
+</details>
+<details class="group py-8 border-b border-outline-variant/20 reveal">
+<summary class="flex justify-between items-center cursor-pointer list-none">
+<span class="font-headline text-xl text-on-surface">How do I get to Vikrama Heritage?</span>
+<span class="material-symbols-outlined transition-transform group-open:rotate-180">expand_more</span>
+</summary>
+<div class="mt-6 font-body text-on-surface-variant leading-relaxed">
+                        The nearest airport is Vadodara (BDQ), which is about a 45-minute drive from the venue. We will be arranging complimentary shuttle services for all our guests from Vadodara airport to Vikrama Heritage.
+                    </div>
+</details>
+<details class="group py-8 border-b border-outline-variant/20 reveal">
+<summary class="flex justify-between items-center cursor-pointer list-none">
+<span class="font-headline text-xl text-on-surface">Can I bring a plus one?</span>
+<span class="material-symbols-outlined transition-transform group-open:rotate-180">expand_more</span>
+</summary>
+<div class="mt-6 font-body text-on-surface-variant leading-relaxed">
+                        We have carefully curated our guest list based on the capacity of our venue. We are only able to accommodate those specifically named on your invitation. We appreciate your understanding.
+                    </div>
+</details>
+</div>
+</div>
+</section>
+<!-- RSVP Section -->
+<section class="py-32 px-6 bg-surface-container relative overflow-hidden mandala-texture" id="rsvp">
+<div class="max-w-2xl mx-auto bg-surface p-12 md:p-20 shadow-xl relative z-10 reveal">
+<div class="text-center mb-12 space-y-4">
+<h2 class="font-headline text-5xl">Kindly Respond</h2>
+<p class="font-body text-on-surface-variant max-w-md mx-auto">We kindly request your response at your earliest convenience. Please let us know your availability for the celebrations so we can plan accordingly. We cannot wait to celebrate with you.</p>
+<p class="font-label text-xs tracking-widest uppercase text-outline pt-4">By October 15, 2026</p>
+</div>
+<form class="space-y-10">
+<div class="space-y-2">
+<label class="font-label text-[10px] tracking-widest uppercase text-outline">Full Name</label>
+<input class="w-full bg-transparent border-0 border-b border-outline focus:ring-0 focus:border-primary transition-colors py-3 px-0 placeholder:text-outline-variant/50" placeholder="Shruti &amp; Shubham" type="text"/>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+<div class="space-y-2">
+<label class="font-label text-[10px] tracking-widest uppercase text-outline">Contact Information</label>
+<input class="w-full bg-transparent border-0 border-b border-outline focus:ring-0 focus:border-primary transition-colors py-3 px-0 placeholder:text-outline-variant/50" placeholder="email@address.com" type="email"/>
+</div>
+<div class="space-y-2">
+<label class="font-label text-[10px] tracking-widest uppercase text-outline">Will you attend?</label>
+<select class="w-full bg-transparent border-0 border-b border-outline focus:ring-0 focus:border-primary transition-colors py-3 px-0 appearance-none">
+<option>Happily Attend</option>
+<option>Regretfully Decline</option>
+</select>
+</div>
+</div>
+<div class="space-y-4">
+<p class="font-label text-[10px] tracking-widest uppercase text-outline">Which events will you join us for?</p>
+<div class="flex flex-wrap gap-6">
+<label class="flex items-center gap-3 cursor-pointer">
+<input class="rounded-sm border-outline text-primary focus:ring-primary h-4 w-4" type="checkbox"/>
+<span class="text-sm">Mehndi</span>
+</label>
+<label class="flex items-center gap-3 cursor-pointer">
+<input class="rounded-sm border-outline text-primary focus:ring-primary h-4 w-4" type="checkbox"/>
+<span class="text-sm">Haldi</span>
+</label>
+<label class="flex items-center gap-3 cursor-pointer">
+<input class="rounded-sm border-outline text-primary focus:ring-primary h-4 w-4" type="checkbox"/>
+<span class="text-sm">Sangeet</span>
+</label>
+<label class="flex items-center gap-3 cursor-pointer">
+<input class="rounded-sm border-outline text-primary focus:ring-primary h-4 w-4" type="checkbox"/>
+<span class="text-sm">Wedding Ceremony</span>
+</label>
+</div>
+</div>
+<div class="space-y-2">
+<label class="font-label text-[10px] tracking-widest uppercase text-outline">Dietary Restrictions</label>
+<input class="w-full bg-transparent border-0 border-b border-outline focus:ring-0 focus:border-primary transition-colors py-3 px-0 placeholder:text-outline-variant/50" placeholder="e.g. Jain, Vegan, Allergies..." type="text"/>
+</div>
+<button class="w-full py-4 bg-primary text-on-primary font-label text-sm tracking-widest uppercase hover:bg-primary-container transition-all duration-400 mt-8" type="submit">
+                    Submit Response
+                </button>
+</form>
+</div>
+</section>
+<!-- Footer -->
+<footer class="bg-[#f1ede8] dark:bg-[#1c1c19] text-[#8f4b3f] dark:text-[#eb9687] flex flex-col items-center gap-8 w-full text-center py-16 px-12 border-t border-[#d4c4b7]/20 relative overflow-hidden">
+<div class="absolute inset-0 mandala-divider opacity-5 pointer-events-none"></div>
+<div class="font-serif italic text-lg text-[#1c1c19] dark:text-[#fdf9f4]">S &amp; S</div>
+<div class="font-sans text-[10px] tracking-[0.1rem] uppercase space-y-2">
+<p class="text-[#82756a]">© 2026 Shruti &amp; Shubham. Crafted for an Ethereal Forever.</p>
+<div class="flex gap-6 justify-center">
+<a class="text-[#82756a] hover:text-[#8f4b3f] transition-colors duration-300" href="#">Privacy Policy</a>
+<a class="text-[#82756a] hover:text-[#8f4b3f] transition-colors duration-300" href="#">Contact Concierge</a>
+</div>
+</div>
+<div class="flex gap-6 mt-4">
+<span class="material-symbols-outlined opacity-60">favorite</span>
+<span class="material-symbols-outlined opacity-60">auto_awesome</span>
+<span class="material-symbols-outlined opacity-60">self_improvement</span>
+</div>
+</footer>
+<script>
+        // Simple Scroll Reveal Observer
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.reveal, .fade-in').forEach(el => {
+            observer.observe(el);
+        });
+    </script>
+</body></html>
