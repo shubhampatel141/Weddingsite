@@ -151,7 +151,9 @@
 <!-- Hero Section -->
 <section class="relative h-screen w-full flex flex-col items-center justify-center overflow-hidden bg-surface">
 <div class="absolute inset-0 z-0">
-<div class="w-full h-full bg-cover bg-center opacity-60" data-alt="Dreamy wide angle landscape of historic Indian heritage palace at Pavagadh during golden sunset with soft ethereal light." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuA8Vybtn0JS1UfTIV5P86bJy7U3C3u8bCC_ib2OP5ZrNnq1SemhU6F0JIMJ-rIswmKKh-CcYzysVpE6V4BczM9fGoj53xYG15SwYtOODRYnb5fPmttt2RIQz5glE1sHb7aqOtoV6LwmPgkdKngbqETNK_1kT3kRkGDqejf8P4WBEM1WnBbPQwdKc-pfhrX5dm8sr2FHn1e8PgTp5Tz2lQXy4onCikQnDoUmnF1SIgqc8nwM52hQpK8rKsvlA0LCKO2vAGywCE_Fz6en');"></div>
+<video id="hero-video" class="w-full h-full object-cover opacity-60" autoplay muted loop playsinline>
+<source src="hero.mp4" type="video/mp4"/>
+</video>
 <div class="absolute inset-0 bg-gradient-to-b from-transparent via-background/20 to-background"></div>
 </div>
 <div class="relative z-10 text-center space-y-8 max-w-4xl px-6 fade-in active">
@@ -207,7 +209,7 @@
 <!-- Part 1 -->
 <div class="col-span-12 md:col-span-7 relative group reveal">
 <div class="overflow-hidden rounded-sm">
-<img class="w-full h-[600px] object-cover hover:scale-105 transition-transform duration-[2000ms]" alt="Cinematic editorial photograph of a couple holding hands while walking through ancient stone archway at sunset." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDVgglv6PvcfuCPfkjbaJXgOntq-22vtMsbpVwwElwPAKAfPKbqn27ePC0OolDu1vhm2NPGR_v4-6v8xVJf98eXQcwo57vckhY6As4h9XHXoX_kufgVTZh-ZpIvjZY6aDisS7LSHOXsQfluVSjpGMsah-y8Z50-ofKwtfhTFMIkxkmEJfY8wjJSIUqEr111B-EjJ0QB_12lYZp14UPDGkhfqI9IOWHA8y_mJMzz62yGpn2z11-PRpPnktjhHg9CrAIvIzcV5-1Wls8A"/>
+<img class="w-full h-[600px] object-cover hover:scale-105 transition-transform duration-[2000ms]" alt="Sunset in New York City." src="SunsetNYC.jpeg"/>
 </div>
 <div class="absolute -bottom-12 -right-6 md:-right-12 bg-surface-container p-12 max-w-sm hidden md:block shadow-sm reveal" style="transition-delay: 200ms;">
 <h3 class="font-headline text-3xl mb-4 italic">The Journey</h3>
@@ -575,6 +577,14 @@
 </div>
 </footer>
 <script>
+        // ── Hero Video Slow Motion ────────────────────────────────────────
+        const heroVideo = document.getElementById('hero-video');
+        if (heroVideo) {
+            heroVideo.addEventListener('loadedmetadata', () => {
+                heroVideo.playbackRate = 0.5;
+            });
+        }
+
         // ── Countdown Timer ──────────────────────────────────────────────
         function updateCountdown() {
             const weddingDate = new Date('2026-12-22T00:00:00+05:30');
