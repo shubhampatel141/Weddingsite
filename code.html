@@ -127,16 +127,27 @@
 <nav class="fixed top-0 w-full z-50 bg-stone-50/70 dark:bg-stone-900/70 backdrop-blur-md flex justify-between items-center px-12 py-6">
 <div class="font-serif italic text-2xl text-[#1c1c19] dark:text-[#fdf9f4]">S &amp; S</div>
 <div class="hidden md:flex gap-12 font-serif text-sm tracking-widest uppercase items-center">
-<a class="text-[#8f4b3f] border-b border-[#735c00] pb-1 transition-all duration-400" href="#">Our Story</a>
-<a class="text-[#1c1c19] dark:text-[#fdf9f4] opacity-70 hover:opacity-100 hover:text-[#735c00] transition-all duration-400" href="#events">Events</a>
-<a class="text-[#1c1c19] dark:text-[#fdf9f4] opacity-70 hover:opacity-100 hover:text-[#735c00] transition-all duration-400" href="#travel">Travel</a>
-<a class="text-[#1c1c19] dark:text-[#fdf9f4] opacity-70 hover:opacity-100 hover:text-[#735c00] transition-all duration-400" href="#gallery">Gallery</a>
-<a class="px-6 py-2 bg-primary text-on-primary rounded-md tracking-widest hover:bg-primary-container transition-all duration-400" href="#rsvp">RSVP</a>
+<a class="nav-link text-[#8f4b3f] border-b border-[#735c00] pb-1 transition-all duration-[400ms]" data-section="story" href="#story">Our Story</a>
+<a class="nav-link text-[#1c1c19] dark:text-[#fdf9f4] opacity-70 hover:opacity-100 hover:text-[#735c00] transition-all duration-[400ms]" data-section="events" href="#events">Events</a>
+<a class="nav-link text-[#1c1c19] dark:text-[#fdf9f4] opacity-70 hover:opacity-100 hover:text-[#735c00] transition-all duration-[400ms]" data-section="travel" href="#travel">Travel</a>
+<a class="nav-link text-[#1c1c19] dark:text-[#fdf9f4] opacity-70 hover:opacity-100 hover:text-[#735c00] transition-all duration-[400ms]" data-section="gallery" href="#gallery">Gallery</a>
+<a class="px-6 py-2 bg-primary text-on-primary rounded-md tracking-widest hover:bg-primary-container transition-all duration-[400ms]" href="#rsvp">RSVP</a>
 </div>
-<div class="md:hidden">
-<span class="material-symbols-outlined text-primary text-3xl">menu</span>
-</div>
+<button aria-label="Toggle navigation menu" class="md:hidden" id="mobile-menu-btn" type="button">
+<span class="material-symbols-outlined text-primary text-3xl" id="mobile-menu-icon">menu</span>
+</button>
 </nav>
+<!-- Mobile Menu Overlay -->
+<div aria-hidden="true" class="fixed inset-0 z-40 bg-surface/95 backdrop-blur-md flex-col items-center justify-center gap-8 hidden" id="mobile-menu">
+<button aria-label="Close menu" class="absolute top-6 right-12" id="mobile-menu-close" type="button">
+<span class="material-symbols-outlined text-primary text-3xl">close</span>
+</button>
+<a class="font-headline text-3xl text-on-surface hover:text-primary transition-colors" href="#story" onclick="closeMobileMenu()">Our Story</a>
+<a class="font-headline text-3xl text-on-surface hover:text-primary transition-colors" href="#events" onclick="closeMobileMenu()">Events</a>
+<a class="font-headline text-3xl text-on-surface hover:text-primary transition-colors" href="#travel" onclick="closeMobileMenu()">Travel</a>
+<a class="font-headline text-3xl text-on-surface hover:text-primary transition-colors" href="#gallery" onclick="closeMobileMenu()">Gallery</a>
+<a class="mt-4 px-10 py-3 bg-primary text-on-primary font-label text-sm tracking-widest uppercase" href="#rsvp" onclick="closeMobileMenu()">RSVP</a>
+</div>
 <!-- Hero Section -->
 <section class="relative h-screen w-full flex flex-col items-center justify-center overflow-hidden bg-surface">
 <div class="absolute inset-0 z-0">
@@ -155,16 +166,20 @@
 <!-- Countdown Timer -->
 <div class="flex gap-8 justify-center pt-12 border-t border-outline-variant/30 mt-12 max-w-md mx-auto">
 <div class="flex flex-col items-center">
-<span class="text-3xl font-headline text-primary">342</span>
+<span class="text-3xl font-headline text-primary" id="countdown-days">--</span>
 <span class="text-[10px] tracking-widest uppercase opacity-60">Days</span>
 </div>
 <div class="flex flex-col items-center">
-<span class="text-3xl font-headline text-primary">12</span>
+<span class="text-3xl font-headline text-primary" id="countdown-hours">--</span>
 <span class="text-[10px] tracking-widest uppercase opacity-60">Hours</span>
 </div>
 <div class="flex flex-col items-center">
-<span class="text-3xl font-headline text-primary">45</span>
+<span class="text-3xl font-headline text-primary" id="countdown-mins">--</span>
 <span class="text-[10px] tracking-widest uppercase opacity-60">Mins</span>
+</div>
+<div class="flex flex-col items-center">
+<span class="text-3xl font-headline text-primary" id="countdown-secs">--</span>
+<span class="text-[10px] tracking-widest uppercase opacity-60">Secs</span>
 </div>
 </div>
 </div>
@@ -187,12 +202,12 @@
 <!-- Mandala Divider 1 -->
 <div class="h-24 mandala-divider bg-surface"></div>
 <!-- Our Story Section -->
-<section class="py-32 bg-surface overflow-hidden">
+<section class="py-32 bg-surface overflow-hidden" id="story">
 <div class="asymmetric-grid max-w-[1400px] mx-auto gap-y-24 px-6 md:px-12">
 <!-- Part 1 -->
 <div class="col-span-12 md:col-span-7 relative group reveal">
 <div class="overflow-hidden rounded-sm">
-<img class="w-full h-[600px] object-cover hover:scale-105 transition-transform duration-[2000ms]" data-alt="Cinematic editorial photograph of a couple holding hands while walking through ancient stone archway at sunset." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDVgglv6PvcfuCPfkjbaJXgOntq-22vtMsbpVwwElwPAKAfPKbqn27ePC0OolDu1vhm2NPGR_v4-6v8xVJf98eXQcwo57vckhY6As4h9XHXoX_kufgVTZh-ZpIvjZY6aDisS7LSHOXsQfluVSjpGMsah-y8Z50-ofKwtfhTFMIkxkmEJfY8wjJSIUqEr111B-EjJ0QB_12lYZp14UPDGkhfqI9IOWHA8y_mJMzz62yGpn2z11-PRpPnktjhHg9CrAIvIzcV5-1Wls8A"/>
+<img class="w-full h-[600px] object-cover hover:scale-105 transition-transform duration-[2000ms]" alt="Cinematic editorial photograph of a couple holding hands while walking through ancient stone archway at sunset." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDVgglv6PvcfuCPfkjbaJXgOntq-22vtMsbpVwwElwPAKAfPKbqn27ePC0OolDu1vhm2NPGR_v4-6v8xVJf98eXQcwo57vckhY6As4h9XHXoX_kufgVTZh-ZpIvjZY6aDisS7LSHOXsQfluVSjpGMsah-y8Z50-ofKwtfhTFMIkxkmEJfY8wjJSIUqEr111B-EjJ0QB_12lYZp14UPDGkhfqI9IOWHA8y_mJMzz62yGpn2z11-PRpPnktjhHg9CrAIvIzcV5-1Wls8A"/>
 </div>
 <div class="absolute -bottom-12 -right-6 md:-right-12 bg-surface-container p-12 max-w-sm hidden md:block shadow-sm reveal" style="transition-delay: 200ms;">
 <h3 class="font-headline text-3xl mb-4 italic">The Journey</h3>
@@ -214,7 +229,7 @@
 <!-- Part 3 -->
 <div class="col-span-12 md:col-span-5 md:order-last order-none mt-12 md:mt-0 reveal">
 <div class="overflow-hidden rounded-sm relative">
-<img class="w-full h-[500px] object-cover" data-alt="Intimate close up portrait of the couple's faces partially in shadow with soft warm light highlights." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA0twGD3WSHpm-dNb7ppwU2GwBHjkXwwIcgtruqaTPlNO-E6FpjLZaFEylOb32QMVmF4cBG_y8oerdbZfX36PPhIuQKGMIYNsrOwDKuHvniex84ijSBPukQKVmI0OQ2gJE1qcrfqB3In4MTKVrhHsYPQ8Q1VyM7yY8PmS5tok8krlzmRmmLB66qKhgi_AII4HB0WUaOLby8hqytWGD4zEdG-z4a7MBc102khP8OJsdbX6ZuNcLuWvYWCZl7TfaNLWBzCP1hGIE63maj"/>
+<img class="w-full h-[500px] object-cover" alt="Intimate close up portrait of the couple's faces partially in shadow with soft warm light highlights." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA0twGD3WSHpm-dNb7ppwU2GwBHjkXwwIcgtruqaTPlNO-E6FpjLZaFEylOb32QMVmF4cBG_y8oerdbZfX36PPhIuQKGMIYNsrOwDKuHvniex84ijSBPukQKVmI0OQ2gJE1qcrfqB3In4MTKVrhHsYPQ8Q1VyM7yY8PmS5tok8krlzmRmmLB66qKhgi_AII4HB0WUaOLby8hqytWGD4zEdG-z4a7MBc102khP8OJsdbX6ZuNcLuWvYWCZl7TfaNLWBzCP1hGIE63maj"/>
 </div>
 </div>
 <div class="col-span-12 md:col-span-7 flex items-center md:pr-24 reveal">
@@ -389,14 +404,19 @@
 </div>
 <div class="md:col-span-7 h-[600px] bg-surface-container rounded-sm overflow-hidden shadow-sm reveal" style="transition-delay: 200ms;">
 <div class="w-full h-full relative">
-<img class="w-full h-full object-cover grayscale opacity-40" data-alt="Detailed vintage-style map of the Pavagadh hills region with subtle gold ink markings." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAAEpkDUijE6X7-B0TktCi4IT3wcrok-6WshMtZySAP_DQmzQF8_Edet8jKeoJrtM4766SCeoWuuzpEBG3_3yvcCqMWkFUHYBzt9JTRlOvhoSIp2zCM9w6rSwrEFw3Obv-AcSS2IcSJqNd2Xi0urHCN9PlwaT3V1C5IfeKvb0ut7uYMXS1MJfLt32i816ELOSDwLT9gwsN6aKJvd75hcuioN4svpfUuEjLlIA_AfB-CELewnwvX5GxBWsaRLhoRfeE2QBGEPMLRpIld"/>
-<div class="absolute inset-0 flex items-center justify-center">
-<div class="bg-surface p-8 shadow-xl text-center space-y-4 max-w-xs relative overflow-hidden">
+<iframe
+  class="w-full h-full border-0"
+  loading="lazy"
+  allowfullscreen
+  referrerpolicy="no-referrer-when-downgrade"
+  title="Vikrama Heritage, Champaner-Pavagadh map"
+  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3697.8!2d73.5225!3d22.4916!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x395f9d9e5b5b5b5b%3A0x1234567890abcdef!2sChampaner-Pavagadh%20Archaeological%20Park%2C%20Gujarat!5e0!3m2!1sen!2sin!4v1691000000000!5m2!1sen!2sin"
+></iframe>
+<div class="absolute top-4 left-4 bg-surface p-4 shadow-xl text-center space-y-2 max-w-xs relative overflow-hidden">
 <div class="absolute top-0 left-0 w-full h-1 bg-primary/10"></div>
-<span class="material-symbols-outlined text-primary text-4xl" style="font-variation-settings: 'FILL' 1;">push_pin</span>
-<p class="font-headline text-xl">Vikrama Heritage</p>
-<p class="text-[10px] tracking-widest uppercase">Embedded Map View</p>
-</div>
+<span class="material-symbols-outlined text-primary text-3xl" style="font-variation-settings: 'FILL' 1;">push_pin</span>
+<p class="font-headline text-lg">Vikrama Heritage</p>
+<p class="text-[10px] tracking-widest uppercase text-outline">Champaner-Pavagadh, Gujarat</p>
 </div>
 </div>
 </div>
@@ -412,22 +432,22 @@
 </div>
 <div class="columns-1 md:columns-2 lg:columns-3 gap-8 space-y-8">
 <div class="relative overflow-hidden group reveal">
-<img class="w-full grayscale hover:grayscale-0 transition-all duration-700" data-alt="Black and white artistic photograph of a couple standing by a calm lake with mountain reflections." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCaDapNUaTN00SA0VXMfgkl8MwPozad890GkG2hvKLsQ8ojwS0QzoEm84JA0ar1mEKQh7Hasd1HhmsTxqaxZK6qf56PXPTLG2sHJ9hqX--4dmnJqZk7Yd3SP6BFJ3ob3_hKY50wQsAwXiY5KZT8n-ljQz9OYywImtyVD9vZOn4yx7iAbr4SmHN8mbW30Djhkg5lC_hpEbmQhA2FPxp6cagT3gihkBMdMxRjQbgKyz2Al-pRN6dO6THS6JHe_TwcDcJvlvmYprIYAQM_"/>
+<img class="w-full grayscale hover:grayscale-0 transition-all duration-700" alt="Black and white artistic photograph of a couple standing by a calm lake with mountain reflections." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCaDapNUaTN00SA0VXMfgkl8MwPozad890GkG2hvKLsQ8ojwS0QzoEm84JA0ar1mEKQh7Hasd1HhmsTxqaxZK6qf56PXPTLG2sHJ9hqX--4dmnJqZk7Yd3SP6BFJ3ob3_hKY50wQsAwXiY5KZT8n-ljQz9OYywImtyVD9vZOn4yx7iAbr4SmHN8mbW30Djhkg5lC_hpEbmQhA2FPxp6cagT3gihkBMdMxRjQbgKyz2Al-pRN6dO6THS6JHe_TwcDcJvlvmYprIYAQM_"/>
 </div>
 <div class="relative overflow-hidden group reveal">
-<img class="w-full" data-alt="Detailed close up of intricate bridal henna designs on hands with heavy gold jewelry." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCPrxOBwi2hdVZtE3a4PlugNmj_87JGrt861AuzE7KvvKGWQARSlMPEpU-C6iDsp4mkogq2ix9al-QsIzLbBYr1AwR4YTBqsvDU2TxH0t2YLEeWi8_pNiMqYbohuW-J5z4sUL5wGQnaZCJLOqAy-nol1nmWa2gEkDzJKiXQ_3YQ-4XRV6ZUuhU4FkcQpKB9OmtBidg3WrXI6Pwr48lJKdbnWgaBZa15YH0C1gmS2wUZqnoofEQkhjb7JyuFKpAeE6B8wMQy7YrunbFT"/>
+<img class="w-full" alt="Detailed close up of intricate bridal henna designs on hands with heavy gold jewelry." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCPrxOBwi2hdVZtE3a4PlugNmj_87JGrt861AuzE7KvvKGWQARSlMPEpU-C6iDsp4mkogq2ix9al-QsIzLbBYr1AwR4YTBqsvDU2TxH0t2YLEeWi8_pNiMqYbohuW-J5z4sUL5wGQnaZCJLOqAy-nol1nmWa2gEkDzJKiXQ_3YQ-4XRV6ZUuhU4FkcQpKB9OmtBidg3WrXI6Pwr48lJKdbnWgaBZa15YH0C1gmS2wUZqnoofEQkhjb7JyuFKpAeE6B8wMQy7YrunbFT"/>
 </div>
 <div class="relative overflow-hidden group reveal">
-<img class="w-full grayscale hover:grayscale-0 transition-all duration-700" data-alt="Elegant photo of traditional Indian wedding attire hanging against a carved wooden door." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDiarYwPVM2fgviX3V1uDOt1Ccnl1nSw-XtBKUVMjqObJac7oJtDGm5oPoOw9lj3ppmtMXmnaQkDdcaB1D-waaP7lMCaGZbVolmCbDy3_KqIi_ayAhl7mRbUwGBSm4TapCSCD0o_wQ3ZjloGRJ2PL9tC3sJ8uvDkoLJ9TVbhQJTb_lJM3sbHkE5nqFUyOSwhAw7SO-e8_RJCFtfbAIfU4Lgz69l1_-TBphYjna_qHjDfqKr-bc0VUJOkQNVv6D24r48x-0nyFuJ8GKs"/>
+<img class="w-full grayscale hover:grayscale-0 transition-all duration-700" alt="Elegant photo of traditional Indian wedding attire hanging against a carved wooden door." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDiarYwPVM2fgviX3V1uDOt1Ccnl1nSw-XtBKUVMjqObJac7oJtDGm5oPoOw9lj3ppmtMXmnaQkDdcaB1D-waaP7lMCaGZbVolmCbDy3_KqIi_ayAhl7mRbUwGBSm4TapCSCD0o_wQ3ZjloGRJ2PL9tC3sJ8uvDkoLJ9TVbhQJTb_lJM3sbHkE5nqFUyOSwhAw7SO-e8_RJCFtfbAIfU4Lgz69l1_-TBphYjna_qHjDfqKr-bc0VUJOkQNVv6D24r48x-0nyFuJ8GKs"/>
 </div>
 <div class="relative overflow-hidden group reveal">
-<img class="w-full" data-alt="Candid moment of the couple laughing during their engagement ceremony with blurred floral background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCYSa_N8RqPwsx-QCFaoUgUHKF5ZcMVl5X9-9w4RW2IGgHbS6OPowRYjjz1dh_7hpgjFIodyDJ7yrue9PmPY-LSDLp0lNQZrR8JuWD97DR4G0fNntjwhQCJe4BCxQN9XDvNPRgwcA7S6vXX38qriTVWp-AdFh6ozRh8SMmhcpY-tbt7Y7NU5ypRog3sB24PXLo2bgWz-afG0opfc82f2BdFOEZkCvhgGEyC-2oT5IVOzBRPIvwazfF9Q2F2Zci1s91qeCIJRRG4FVwk"/>
+<img class="w-full" alt="Candid moment of the couple laughing during their engagement ceremony with blurred floral background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCYSa_N8RqPwsx-QCFaoUgUHKF5ZcMVl5X9-9w4RW2IGgHbS6OPowRYjjz1dh_7hpgjFIodyDJ7yrue9PmPY-LSDLp0lNQZrR8JuWD97DR4G0fNntjwhQCJe4BCxQN9XDvNPRgwcA7S6vXX38qriTVWp-AdFh6ozRh8SMmhcpY-tbt7Y7NU5ypRog3sB24PXLo2bgWz-afG0opfc82f2BdFOEZkCvhgGEyC-2oT5IVOzBRPIvwazfF9Q2F2Zci1s91qeCIJRRG4FVwk"/>
 </div>
 <div class="relative overflow-hidden group reveal">
-<img class="w-full grayscale hover:grayscale-0 transition-all duration-700" data-alt="Wide shot of a luxury dinner table setup with many candles and white flower centerpieces." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCgTT_DzKY8rznyP_G_mz817-n1ug9u2RBbJMpDaMW7RNm6Cr2f-P1uk0sy6Nw7YAag689ky51lzY5__-UfDV_efJZOt421gZFaV1IWbteYNF4Bco3L5zcg2U0kYh1vtalZCQw5zj8Hpmp4T5cAilQaB1zaCrzSYqIjT1TBtd9XMUZqtDZejLDwCMBaNpIjxFQvOMWpH9HeeJcUnAFoI3BR2lCkqf-gZltJro3DB-HOHqddz32sKehus1oUtfwlmh8F5M2nx1HZ6PYW"/>
+<img class="w-full grayscale hover:grayscale-0 transition-all duration-700" alt="Wide shot of a luxury dinner table setup with many candles and white flower centerpieces." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCgTT_DzKY8rznyP_G_mz817-n1ug9u2RBbJMpDaMW7RNm6Cr2f-P1uk0sy6Nw7YAag689ky51lzY5__-UfDV_efJZOt421gZFaV1IWbteYNF4Bco3L5zcg2U0kYh1vtalZCQw5zj8Hpmp4T5cAilQaB1zaCrzSYqIjT1TBtd9XMUZqtDZejLDwCMBaNpIjxFQvOMWpH9HeeJcUnAFoI3BR2lCkqf-gZltJro3DB-HOHqddz32sKehus1oUtfwlmh8F5M2nx1HZ6PYW"/>
 </div>
 <div class="relative overflow-hidden group reveal">
-<img class="w-full" data-alt="Couple sitting on the steps of an ancient Indian temple at dusk with soft lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAkhyEq02Axq9HhsMCNdLkxibj_6pNuzWhO5xqDfKwPLpoU1t6IFVoLfVBgW1AB-7TuEkTpU8iYDV8edA44uhb-tf6TKFCXg74Hj7FjxnSkLQVI4fqQck3NOxv2zDggIX9bNwEn-oplo3u34454i_n_rVPEPSvyCwSAlxqXvo39p7GRUl-jD0GsFnmcBuNdwQqYetfrNcjSKdY8b3lpQkXFo5lJ6-Xcqp06nBq_RY2J6ISGGdhRtjY_g1m6SldYjgZ0CFNzFPR97bqM"/>
+<img class="w-full" alt="Couple sitting on the steps of an ancient Indian temple at dusk with soft lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAkhyEq02Axq9HhsMCNdLkxibj_6pNuzWhO5xqDfKwPLpoU1t6IFVoLfVBgW1AB-7TuEkTpU8iYDV8edA44uhb-tf6TKFCXg74Hj7FjxnSkLQVI4fqQck3NOxv2zDggIX9bNwEn-oplo3u34454i_n_rVPEPSvyCwSAlxqXvo39p7GRUl-jD0GsFnmcBuNdwQqYetfrNcjSKdY8b3lpQkXFo5lJ6-Xcqp06nBq_RY2J6ISGGdhRtjY_g1m6SldYjgZ0CFNzFPR97bqM"/>
 </div>
 </div>
 </div>
@@ -475,21 +495,23 @@
 <p class="font-body text-on-surface-variant max-w-md mx-auto">We kindly request your response at your earliest convenience. Please let us know your availability for the celebrations so we can plan accordingly. We cannot wait to celebrate with you.</p>
 <p class="font-label text-xs tracking-widest uppercase text-outline pt-4">By October 15, 2026</p>
 </div>
-<form class="space-y-10">
+<form class="space-y-10" id="rsvp-form" novalidate>
 <div class="space-y-2">
-<label class="font-label text-[10px] tracking-widest uppercase text-outline">Full Name</label>
-<input class="w-full bg-transparent border-0 border-b border-outline focus:ring-0 focus:border-primary transition-colors py-3 px-0 placeholder:text-outline-variant/50" placeholder="Shruti &amp; Shubham" type="text"/>
+<label class="font-label text-[10px] tracking-widest uppercase text-outline" for="rsvp-name">Full Name</label>
+<input class="w-full bg-transparent border-0 border-b border-outline focus:ring-0 focus:border-primary transition-colors py-3 px-0 placeholder:text-outline-variant/50" id="rsvp-name" name="name" placeholder="Your Full Name" required type="text"/>
+<p class="hidden text-xs text-error mt-1" id="rsvp-name-error">Please enter your full name.</p>
 </div>
 <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
 <div class="space-y-2">
-<label class="font-label text-[10px] tracking-widest uppercase text-outline">Contact Information</label>
-<input class="w-full bg-transparent border-0 border-b border-outline focus:ring-0 focus:border-primary transition-colors py-3 px-0 placeholder:text-outline-variant/50" placeholder="email@address.com" type="email"/>
+<label class="font-label text-[10px] tracking-widest uppercase text-outline" for="rsvp-email">Contact Information</label>
+<input class="w-full bg-transparent border-0 border-b border-outline focus:ring-0 focus:border-primary transition-colors py-3 px-0 placeholder:text-outline-variant/50" id="rsvp-email" name="email" placeholder="email@address.com" required type="email"/>
+<p class="hidden text-xs text-error mt-1" id="rsvp-email-error">Please enter a valid email address.</p>
 </div>
 <div class="space-y-2">
-<label class="font-label text-[10px] tracking-widest uppercase text-outline">Will you attend?</label>
-<select class="w-full bg-transparent border-0 border-b border-outline focus:ring-0 focus:border-primary transition-colors py-3 px-0 appearance-none">
-<option>Happily Attend</option>
-<option>Regretfully Decline</option>
+<label class="font-label text-[10px] tracking-widest uppercase text-outline" for="rsvp-attendance">Will you attend?</label>
+<select class="w-full bg-transparent border-0 border-b border-outline focus:ring-0 focus:border-primary transition-colors py-3 px-0 appearance-none" id="rsvp-attendance" name="attendance">
+<option value="attend">Happily Attend</option>
+<option value="decline">Regretfully Decline</option>
 </select>
 </div>
 </div>
@@ -497,31 +519,42 @@
 <p class="font-label text-[10px] tracking-widest uppercase text-outline">Which events will you join us for?</p>
 <div class="flex flex-wrap gap-6">
 <label class="flex items-center gap-3 cursor-pointer">
-<input class="rounded-sm border-outline text-primary focus:ring-primary h-4 w-4" type="checkbox"/>
+<input class="rounded-sm border-outline text-primary focus:ring-primary h-4 w-4" type="checkbox" name="events" value="mehndi"/>
 <span class="text-sm">Mehndi</span>
 </label>
 <label class="flex items-center gap-3 cursor-pointer">
-<input class="rounded-sm border-outline text-primary focus:ring-primary h-4 w-4" type="checkbox"/>
+<input class="rounded-sm border-outline text-primary focus:ring-primary h-4 w-4" type="checkbox" name="events" value="grah-shanti"/>
+<span class="text-sm">Grah Shanti</span>
+</label>
+<label class="flex items-center gap-3 cursor-pointer">
+<input class="rounded-sm border-outline text-primary focus:ring-primary h-4 w-4" type="checkbox" name="events" value="haldi"/>
 <span class="text-sm">Haldi</span>
 </label>
 <label class="flex items-center gap-3 cursor-pointer">
-<input class="rounded-sm border-outline text-primary focus:ring-primary h-4 w-4" type="checkbox"/>
+<input class="rounded-sm border-outline text-primary focus:ring-primary h-4 w-4" type="checkbox" name="events" value="sangeet"/>
 <span class="text-sm">Sangeet</span>
 </label>
 <label class="flex items-center gap-3 cursor-pointer">
-<input class="rounded-sm border-outline text-primary focus:ring-primary h-4 w-4" type="checkbox"/>
+<input class="rounded-sm border-outline text-primary focus:ring-primary h-4 w-4" type="checkbox" name="events" value="wedding"/>
 <span class="text-sm">Wedding Ceremony</span>
 </label>
 </div>
 </div>
 <div class="space-y-2">
-<label class="font-label text-[10px] tracking-widest uppercase text-outline">Dietary Restrictions</label>
-<input class="w-full bg-transparent border-0 border-b border-outline focus:ring-0 focus:border-primary transition-colors py-3 px-0 placeholder:text-outline-variant/50" placeholder="e.g. Jain, Vegan, Allergies..." type="text"/>
+<label class="font-label text-[10px] tracking-widest uppercase text-outline" for="rsvp-dietary">Dietary Restrictions</label>
+<input class="w-full bg-transparent border-0 border-b border-outline focus:ring-0 focus:border-primary transition-colors py-3 px-0 placeholder:text-outline-variant/50" id="rsvp-dietary" name="dietary" placeholder="e.g. Jain, Vegan, Allergies..." type="text"/>
 </div>
-<button class="w-full py-4 bg-primary text-on-primary font-label text-sm tracking-widest uppercase hover:bg-primary-container transition-all duration-400 mt-8" type="submit">
+<button class="w-full py-4 bg-primary text-on-primary font-label text-sm tracking-widest uppercase hover:bg-primary-container transition-all duration-[400ms] mt-8" id="rsvp-submit" type="submit">
                     Submit Response
                 </button>
 </form>
+<!-- RSVP Success State (hidden by default) -->
+<div class="hidden text-center space-y-6 py-8" id="rsvp-success">
+<span class="material-symbols-outlined text-secondary text-6xl" style="font-variation-settings: 'FILL' 1;">favorite</span>
+<h3 class="font-headline text-3xl italic text-on-surface">Thank You!</h3>
+<p class="font-body text-on-surface-variant">Your response has been received. We are so thrilled you will be joining us to celebrate this special occasion.</p>
+<p class="font-label text-[10px] tracking-widest uppercase text-outline">We will be in touch with further details</p>
+</div>
 </div>
 </section>
 <!-- Footer -->
@@ -542,22 +575,142 @@
 </div>
 </footer>
 <script>
-        // Simple Scroll Reveal Observer
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
+        // ── Countdown Timer ──────────────────────────────────────────────
+        function updateCountdown() {
+            const weddingDate = new Date('2026-12-22T00:00:00+05:30');
+            const now = new Date();
+            const diff = weddingDate - now;
 
-        const observer = new IntersectionObserver((entries) => {
+            if (diff <= 0) {
+                document.getElementById('countdown-days').textContent = '0';
+                document.getElementById('countdown-hours').textContent = '0';
+                document.getElementById('countdown-mins').textContent = '0';
+                document.getElementById('countdown-secs').textContent = '0';
+                return;
+            }
+
+            const days  = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const mins  = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const secs  = Math.floor((diff % (1000 * 60)) / 1000);
+
+            document.getElementById('countdown-days').textContent  = days;
+            document.getElementById('countdown-hours').textContent = String(hours).padStart(2, '0');
+            document.getElementById('countdown-mins').textContent  = String(mins).padStart(2, '0');
+            document.getElementById('countdown-secs').textContent  = String(secs).padStart(2, '0');
+        }
+        updateCountdown();
+        setInterval(updateCountdown, 1000);
+
+        // ── Mobile Menu ───────────────────────────────────────────────────
+        const mobileMenu    = document.getElementById('mobile-menu');
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenuClose = document.getElementById('mobile-menu-close');
+
+        function openMobileMenu() {
+            mobileMenu.classList.remove('hidden');
+            mobileMenu.classList.add('flex');
+            mobileMenu.setAttribute('aria-hidden', 'false');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeMobileMenu() {
+            mobileMenu.classList.add('hidden');
+            mobileMenu.classList.remove('flex');
+            mobileMenu.setAttribute('aria-hidden', 'true');
+            document.body.style.overflow = '';
+        }
+
+        mobileMenuBtn.addEventListener('click', openMobileMenu);
+        mobileMenuClose.addEventListener('click', closeMobileMenu);
+
+        // ── Active Nav on Scroll ──────────────────────────────────────────
+        const sections  = ['story', 'events', 'travel', 'gallery', 'rsvp'];
+        const navLinks  = document.querySelectorAll('.nav-link');
+
+        function setActiveNav(id) {
+            navLinks.forEach(link => {
+                const isActive = link.dataset.section === id;
+                link.classList.toggle('text-[#8f4b3f]', isActive);
+                link.classList.toggle('border-b', isActive);
+                link.classList.toggle('border-[#735c00]', isActive);
+                link.classList.toggle('pb-1', isActive);
+                link.classList.toggle('opacity-70', !isActive);
+            });
+        }
+
+        const sectionObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    setActiveNav(entry.target.id);
+                }
+            });
+        }, { threshold: 0.3, rootMargin: '-80px 0px -30% 0px' });
+
+        sections.forEach(id => {
+            const el = document.getElementById(id);
+            if (el) sectionObserver.observe(el);
+        });
+
+        // ── Scroll Reveal ─────────────────────────────────────────────────
+        const revealObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('active');
                 }
             });
-        }, observerOptions);
+        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
 
         document.querySelectorAll('.reveal, .fade-in').forEach(el => {
-            observer.observe(el);
+            revealObserver.observe(el);
         });
+
+        // ── RSVP Form ─────────────────────────────────────────────────────
+        const rsvpForm    = document.getElementById('rsvp-form');
+        const rsvpSuccess = document.getElementById('rsvp-success');
+        const nameInput   = document.getElementById('rsvp-name');
+        const emailInput  = document.getElementById('rsvp-email');
+        const nameError   = document.getElementById('rsvp-name-error');
+        const emailError  = document.getElementById('rsvp-email-error');
+
+        function showError(field, errorEl, show) {
+            errorEl.classList.toggle('hidden', !show);
+            field.classList.toggle('border-error', show);
+            field.classList.toggle('border-outline', !show);
+        }
+
+        rsvpForm.addEventListener('submit', function (e) {
+            e.preventDefault();
+            let valid = true;
+
+            const nameVal  = nameInput.value.trim();
+            const emailVal = emailInput.value.trim();
+            const emailRx  = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+            if (!nameVal) {
+                showError(nameInput, nameError, true);
+                valid = false;
+            } else {
+                showError(nameInput, nameError, false);
+            }
+
+            if (!emailVal || !emailRx.test(emailVal)) {
+                showError(emailInput, emailError, true);
+                valid = false;
+            } else {
+                showError(emailInput, emailError, false);
+            }
+
+            if (!valid) return;
+
+            // Show success state
+            rsvpForm.classList.add('hidden');
+            rsvpSuccess.classList.remove('hidden');
+            rsvpSuccess.classList.add('reveal', 'active');
+        });
+
+        // Clear error on input
+        nameInput.addEventListener('input', () => showError(nameInput, nameError, false));
+        emailInput.addEventListener('input', () => showError(emailInput, emailError, false));
     </script>
 </body></html>
